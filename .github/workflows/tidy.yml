@@ -1,0 +1,19 @@
+name: tidy
+
+on:
+  push:
+
+concurrency:
+  group: tidy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  count-files:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Count files
+        run: find . -type f | wc -l
